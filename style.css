@@ -18,6 +18,8 @@ body {
 
 .container {
     padding: 1rem;
+    min-width: 320px;
+    box-sizing: border-box;
 }
 
 .main-heading {
