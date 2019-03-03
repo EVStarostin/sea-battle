@@ -39,7 +39,7 @@ function initField(size = 10) {
 /**
  * Рендерит поле боя
  * @param {HTMLElement} elem - DOM Node, в которую рендерится поле боя
- * @param {Array.<string|number[]>} field - двумерный массив, хранящий состояние поле боя (0 - пусто, 1 - корабль, 2 - попадание)
+ * @param {Array.<string|number[]>} field - двумерный массив, хранящий состояние поле боя (0 - пусто, 1 - корабль, 2 - попадание, 3 - промах)
  * @param {boolean} [hidden] - в значении true скрываются вражеские корабли, по умолчанию false
  */
 function drawField(elem, field, hidden = false) {
@@ -54,10 +54,14 @@ function drawField(elem, field, hidden = false) {
             if (i === 0 || j === 0) {
                 cell.innerText = field[i][j];
                 cell.classList.add('cell--label');
-            } else if (field[i][j] === 1) {
-                cell.classList.add('cell--live');
             } else if (field[i][j] === 0) {
                 cell.classList.add('cell--empty');
+            } else if (field[i][j] === 1) {
+                cell.classList.add('cell--live');
+            } else if (field[i][j] === 2) {
+                cell.classList.add('cell--sinked');
+            } else if (field[i][j] === 3) {
+                cell.classList.add('cell--missed');
             }
 
             row.appendChild(cell);
@@ -72,7 +76,7 @@ function drawField(elem, field, hidden = false) {
  * @param {Array.<string|number[]} field -двумерный массив, хранящий состояние поле боя
  */
 function placeShips(field) {
-    field[1][5] = 1; field[1][6] = 1; field[1][7] = 1; field[1][8] = 1;
+    field[1][5] = 1; field[1][6] = 2; field[1][7] = 1; field[1][8] = 1;
 
     field[2][2] = 1; field[3][2] = 1; field[4][2] = 1;
     field[4][4] = 1; field[4][5] = 1; field[4][6] = 1;
@@ -85,4 +89,6 @@ function placeShips(field) {
     field[8][3] = 1;
     field[7][6] = 1;
     field[5][9] = 1;
+
+    field[10][8] = 3;
 }

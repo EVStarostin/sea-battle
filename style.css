@@ -22,7 +22,7 @@ body {
 .main-heading {
     margin: 0;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-size: 3rem;
 }
 
@@ -58,21 +58,25 @@ body {
     text-align: center;
 }
 
+.cell--label {
+    font-weight: bold;
+}
+
 .cell--live {
     border: 5px solid var(--field-border-color);
 }
 
-.ship--sinked {
+.cell--sinked {
     border-width: 5px;
     font-size: 2rem;
     color: red;
 }
 
-.ship--sinked:after {
+.cell--sinked:after {
     content: '×';
 }
 
-.ship--sinked, .empty--fired {
+.cell--sinked, .cell--missed {
     font-size: 2rem;
     color: red;
 }
@@ -84,6 +88,10 @@ body {
 @media screen and (max-width: 1200px) {
     :root {
         --field-size: 400px;
+    }
+
+    .cell--sinked, .cell--missed {
+        font-size: 1.5rem;
     }
 }
 
