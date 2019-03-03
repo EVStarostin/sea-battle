@@ -9,7 +9,7 @@ drawField(field2Node, field2);
 
 /**
  * Заполняет начальные значения поля боя
- * @param {number} size - размер поля боя, по умолчанию 10
+ * @param {number} [size] - размер поля боя, по умолчанию 10
  * @returns {Array.<string|number[]>} двумерный массив, хранящий состояние поле боя
  */
 function initField(size = 10) {
@@ -40,20 +40,24 @@ function initField(size = 10) {
  * Рендерит поле боя
  * @param {HTMLElement} elem - DOM Node, в которую рендерится поле боя
  * @param {Array.<string|number[]>} field - двумерный массив, хранящий состояние поле боя (0 - пусто, 1 - корабль, 2 - попадание)
- * @param {boolean} hidden - в значении true скрываются вражеские корабли
+ * @param {boolean} [hidden] - в значении true скрываются вражеские корабли, по умолчанию false
  */
-function drawField(elem, field, hidden) {
+function drawField(elem, field, hidden = false) {
     for (let i = 0; i < field.length; i++) {
         const row = document.createElement('tr');
 
         for (let j = 0; j < field[i].length; j++) {
             const cell = document.createElement('td');
-            cell.className = 'cell--empty';
+            cell.className = 'cell';
+            cell.dataset.pos = `${i}:${j}`;
 
             if (i === 0 || j === 0) {
                 cell.innerText = field[i][j];
+                cell.classList.add('cell--label');
             } else if (field[i][j] === 1) {
-                cell.className = 'cell--live';
+                cell.classList.add('cell--live');
+            } else if (field[i][j] === 0) {
+                cell.classList.add('cell--empty');
             }
 
             row.appendChild(cell);

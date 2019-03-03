@@ -51,7 +51,7 @@ body {
     margin: 1rem;
 }
 
-.cell--empty {
+.cell {
     border: 1px solid var(--field-border-color);
     width: 9%;
     height: 9%;
