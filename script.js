@@ -15,7 +15,7 @@ field2Node.addEventListener('click', onFieldClick(field2));
 /**
  * Заполняет начальные значения поля боя
  * @param {number} [size] - размер поля боя, по умолчанию 10
- * @returns {Array.<string|number[]>} двумерный массив, хранящий состояние поле боя
+ * @returns {Array.<(string|number)[]>} двумерный массив, хранящий состояние поле боя
  */
 function initField(size = 10) {
     const field = Array(size + 1);
@@ -44,7 +44,7 @@ function initField(size = 10) {
 /**
  * Рендерит поле боя
  * @param {HTMLElement} elem - DOM Node, в которую рендерится поле боя
- * @param {Array.<string|number[]>} field - двумерный массив, хранящий состояние поле боя (0 - пусто, 1 - корабль, 2 - попадание, 3 - промах)
+ * @param {Array.<(string|number)[]>} field - двумерный массив, хранящий состояние поле боя (0 - пусто, 1 - корабль, 2 - попадание, 3 - промах)
  * @param {boolean} [hidden] - в значении true скрываются вражеские корабли, по умолчанию false
  */
 function drawField(elem, field, hidden = false) {
@@ -80,7 +80,7 @@ function drawField(elem, field, hidden = false) {
 
 /**
  * Располагает корабли на поле боя
- * @param {Array.<string|number[]} field -двумерный массив, хранящий состояние поле боя
+ * @param {Array.<(string|number)[]} field -двумерный массив, хранящий состояние поле боя
  */
 function placeShips(field) {
     field[1][5] = 1; field[1][6] = 1; field[1][7] = 1; field[1][8] = 1;
@@ -100,7 +100,7 @@ function placeShips(field) {
 
 /**
  * Возвращает обработчик клика по полю боя, которому доступен объект field из замыкания
- * @param {Array.<string|number[]} field - двумерный массив, хранящий состояние поле боя
+ * @param {Array.<(string|number)[]} field - двумерный массив, хранящий состояние поле боя
  * @returns {function} обработчик клика по полю боя
  */
 function onFieldClick(field) {
