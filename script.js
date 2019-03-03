@@ -2,12 +2,15 @@ const field1 = initField();
 const field2 = initField();
 
 placeShips(field1);
+placeShips(field2);
 
 const field1Node = document.getElementById('field-1');
 const field2Node = document.getElementById('field-2');
 
 drawField(field1Node, field1);
-drawField(field2Node, field2);
+drawField(field2Node, field2, true);
+
+field2Node.addEventListener('click', onFieldClick(field2));
 
 /**
  * Заполняет начальные значения поля боя
@@ -45,6 +48,8 @@ function initField(size = 10) {
  * @param {boolean} [hidden] - в значении true скрываются вражеские корабли, по умолчанию false
  */
 function drawField(elem, field, hidden = false) {
+    elem.innerHTML = '';
+
     for (let i = 0; i < field.length; i++) {
         const row = document.createElement('tr');
 
@@ -58,7 +63,7 @@ function drawField(elem, field, hidden = false) {
                 cell.classList.add('cell--label');
             } else if (field[i][j] === 0) {
                 cell.classList.add('cell--empty');
-            } else if (field[i][j] === 1) {
+            } else if (field[i][j] === 1 && !hidden) {
                 cell.classList.add('cell--live');
             } else if (field[i][j] === 2) {
                 cell.classList.add('cell--sinked');
@@ -78,7 +83,7 @@ function drawField(elem, field, hidden = false) {
  * @param {Array.<string|number[]} field -двумерный массив, хранящий состояние поле боя
  */
 function placeShips(field) {
-    field[1][5] = 1; field[1][6] = 2; field[1][7] = 1; field[1][8] = 1;
+    field[1][5] = 1; field[1][6] = 1; field[1][7] = 1; field[1][8] = 1;
 
     field[2][2] = 1; field[3][2] = 1; field[4][2] = 1;
     field[4][4] = 1; field[4][5] = 1; field[4][6] = 1;
@@ -91,6 +96,28 @@ function placeShips(field) {
     field[8][3] = 1;
     field[7][6] = 1;
     field[5][9] = 1;
+}
 
-    field[10][8] = 3;
+/**
+ * Возвращает обработчик клика по полю боя, которому доступен объект field из замыкания
+ * @param {Array.<string|number[]} field - двумерный массив, хранящий состояние поле боя
+ * @returns {function} обработчик клика по полю боя
+ */
+function onFieldClick(field) {
+    return handleFieldClick;
+
+    function handleFieldClick(e) {
+        const pos = e.target.dataset.pos.split(':')
+        const x = pos[0], y = pos[1];
+
+        if (field[x][y] === 0) {
+            field[x][y] = 3;
+        } else if (field[x][y] === 1) {
+            field[x][y] = 2;
+        } else {
+            return;
+        }
+
+        drawField(this, field, true);
+    }
 }

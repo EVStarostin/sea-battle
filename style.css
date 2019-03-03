@@ -1,8 +1,9 @@
 
 :root {
     --main-bgc: #e7ebee;
+    --main-color: blue;
+    --secondary-color: red;
     --field-size: 500px;
-    --field-border-color: blue;
 }
 
 html, body {
@@ -35,6 +36,8 @@ body {
     width: var(--field-size);
     height: var(--field-size);
     border-collapse: collapse;
+    max-width: 100%;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 .grid {
@@ -47,15 +50,20 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: white;
     margin: 1rem;
+    max-width: 100%;
 }
 
 .cell {
-    border: 1px solid var(--field-border-color);
+    border: 1px solid var(--main-color);
     width: 9%;
     height: 9%;
     text-align: center;
+}
+
+.field--clickable .cell:hover {
+    background-color: rgba(0, 0, 255, 0.1);
 }
 
 .cell--label {
@@ -63,13 +71,17 @@ body {
 }
 
 .cell--live {
-    border: 5px solid var(--field-border-color);
+    box-shadow:
+        0 0 0 2px var(--main-color),
+        inset 0 0 0 2px var(--main-color);
 }
 
 .cell--sinked {
-    border-width: 5px;
+    box-shadow:
+        0 0 0 2px var(--main-color),
+        inset 0 0 0 2px var(--main-color);
     font-size: 2rem;
-    color: red;
+    color: var(--secondary-color);
 }
 
 .cell--sinked:after {
@@ -78,14 +90,21 @@ body {
 
 .cell--sinked, .cell--missed {
     font-size: 2rem;
-    color: red;
+    color: var(--secondary-color);
 }
 
 .cell--missed:after {
     content: '•';
 }
 
-@media screen and (max-width: 1200px) {
+.field--clickable .cell--label:hover,
+.field--clickable .cell--live:hover,
+.field--clickable .cell--sinked:hover,
+.field--clickable .cell--missed:hover {
+    background-color: transparent;
+}
+
+@media (max-width: 1199.98px) {
     :root {
         --field-size: 400px;
     }
@@ -95,7 +114,7 @@ body {
     }
 }
 
-@media screen and (max-width: 992px) {
+@media (max-width: 991.98px) {
     .grid {
         flex-direction: column;
         align-items: center;
@@ -103,5 +122,20 @@ body {
 
     .grid__column {
         width: auto;
+    }
+
+    .main-heading {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    :root {
+        --field-size: 300px;
+    }
+
+    .cell--sinked, .cell--missed {
+        font-size: 1rem;
     }
 }
