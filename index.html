@@ -9,18 +9,22 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="main-heading">Морской бой</h1>
+        <header class="header">
+            <h1 class="main-heading">Морской бой</h1>
+        </header>
 
-        <div class="grid">
-            <div class="grid__column">
-                <h2 class="sub-heading">Ваш флот</h2>
-                <table id="field-1" class="field"></table>
+        <main class="main">
+            <div class="grid">
+                <div class="grid__column">
+                    <h2 class="sub-heading">Ваш флот</h2>
+                    <table id="field-1" class="field"></table>
+                </div>
+                <div class="grid__column">
+                    <h2 class="sub-heading">Флот противника</h2>
+                    <table id="field-2" class="field"></table>
+                </div>
             </div>
-            <div class="grid__column">
-                <h2 class="sub-heading">Флот противника</h2>
-                <table id="field-2" class="field"></table>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script src="script.js"></script>

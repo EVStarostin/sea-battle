@@ -1,9 +1,11 @@
 const field1 = initField();
 const field2 = initField();
+
+placeShips(field1);
+
 const field1Node = document.getElementById('field-1');
 const field2Node = document.getElementById('field-2');
 
-placeShips(field1);
 drawField(field1Node, field1);
 drawField(field2Node, field2);
 
